@@ -1,0 +1,709 @@
+openapi: "3.0.3"
+info:
+  title: Momentum api
+  version: "1.0"
+components:
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http
+      description: Token for scoping responses
+  parameters:
+    AcceptHeader:
+      name: Accept
+      in: header
+      required: true
+      description: The content type that the client can understand.
+      schema:
+        type: string
+        default: application/json
+tags:
+  - name: statuses
+    description: Statuses of tasks
+  - name: priorities
+    description: Priorities of tasks
+  - name: departments
+    description: Departments of employees
+  - name: employees
+    description: Employees of the company
+  - name: comments
+    description: Comments of tasks
+  - name: tasks
+    description: Tasks of the company
+paths:
+  /statuses:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - statuses
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+      summary: Get all statuses
+      responses:
+        "200":
+          description: A list of statuses
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 4
+                    name:
+                      type: string
+                      example: "Done"
+                    icon:
+                      type: string
+                      example: "https://momentum-api.redberryinternship.com/storage/priority-icons/Low.png"
+
+        "401":
+          $ref: "blocks/token-required-error.yml"
+  /priorities:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - priorities
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+      summary: Get all priorities
+      responses:
+        "200":
+          description: A list of priorities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 2
+                    name:
+                      type: string
+                      example: "Medium"
+                    icon:
+                      type: string
+                      example: "https://www.pacific-research.com/wp-content/uploads/2020/05/medium-icon.png"
+
+        "401":
+          $ref: "blocks/token-required-error.yml"
+  /departments:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - departments
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+      summary: Get all departments
+      responses:
+        "200":
+          description: A list of departments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 5
+                    name:
+                      type: string
+                      example: "IT"
+
+        "401":
+          $ref: "blocks/token-required-error.yml"
+  /employees:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - employees
+      summary: Get all employees
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+      responses:
+        "200":
+          description: A list of employees
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "ლადო"
+                    surname:
+                      type: string
+                      example: "გაგა"
+                    avatar:
+                      type: string
+                      example: ""
+                    department_id:
+                      type: integer
+                      example: 1
+
+        "401":
+          $ref: "blocks/token-required-error.yml"
+        "404":
+          $ref: "blocks/not-found-error.yml"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - employees
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+      summary: Create a new employee
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "ნიკა"
+                surname:
+                  type: string
+                  example: "ნოკია"
+                avatar:
+                  type: string
+                  format: binary
+                department_id:
+                  type: integer
+                  example: 1
+      responses:
+        "201":
+          description: Employee created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    example: "ნიკა"
+                  surname:
+                    type: string
+                    example: "ნოკია"
+                  avatar:
+                    type: string
+                    format: binary
+                  department_id:
+                    type: integer
+                    example: 1
+        "422":
+          $ref: "blocks/validation-error.yml"
+        "401":
+          $ref: "blocks/token-required-error.yml"
+  /tasks/{task}/comments:
+    get:
+      tags:
+        - comments
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+        - name: task
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      summary: Get all comments for a specific task
+      responses:
+        "200":
+          description: A list of comments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    text:
+                      type: string
+                      example: "ეს დავალება საერთიდ არ არის რთული"
+                    task_id:
+                      type: integer
+                      example: 1
+                    parent_id:
+                      type: integer
+                      nullable: true
+                      description: "ID of the parent comment, if it's not provided it will be counted as main comment"
+                      example: null
+                    author_avatar:
+                      type: string
+                      example: https://api.dicebear.com/9.x/thumbs/svg?seed=127.0.0.1
+                    author_nickname:
+                      type: string
+                      example: Gela
+                    sub_comments:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                            example: 2
+                          text:
+                            type: string
+                            example: "ვისთვის როგორ"
+                          task_id:
+                            type: integer
+                            example: 1
+                          parent_id:
+                            type: integer
+                            example: 1
+                          author_avatar:
+                            type: string
+                            example: https://api.dicebear.com/9.x/thumbs/svg?seed=127.0.0.2
+                          author_nickname:
+                            type: string
+                            example: Lela
+
+        "401":
+          $ref: "blocks/token-required-error.yml"
+        "404":
+          $ref: "blocks/not-found-error.yml"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - comments
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+        - name: task
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      summary: Create a new comment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                  example: "პრიორიტეტი მიენიჭება ვანილა ჯს-ით დაწერას?"
+                parent_id:
+                  type: integer|null
+                  example: 1
+      responses:
+        "201":
+          description: Comment created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 3
+                  text:
+                    type: string
+                    example: "პრიორიტეტი მიენიჭება ვანილა ჯს-ით დაწერას?"
+                  task_id:
+                    type: integer
+                    example: 1
+                  parent_id:
+                    type: integer|null
+                    example: 1
+        "422":
+          $ref: "blocks/validation-error.yml"
+        "401":
+          $ref: "blocks/token-required-error.yml"
+  /tasks:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+        - tasks
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+      summary: Get all tasks
+      responses:
+        "200":
+          description: A list of tasks
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "შესარჩევი დავალება"
+                    description:
+                      type: string
+                      example: "შექმენით ვებ გვერდი დიზაინის მიხედვით"
+                    due_date:
+                      type: number
+                      format: date-time
+                      example: "2025-12-31"
+                    status:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Todo"
+                    priority:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "High"
+                        icon:
+                          type: string
+                    department:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "IT"
+                    employee:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "ლადო"
+                        surname:
+                          type: string
+                          example: "გაგა"
+                        avatar:
+                          type: string
+                        department_id:
+                          type: integer
+                          example: 1
+        "401":
+          $ref: "blocks/token-required-error.yml"
+        "404":
+          $ref: "blocks/not-found-error.yml"
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+        - tasks
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+      summary: Create a new task
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "შექმენით readme ფაილი"
+                description:
+                  type: string
+                  example: "აღწერეთ შესრულებული დავალება რიდმი ფაილით"
+                due_date:
+                  type: string
+                  format: date-time
+                  example: "2025-12-31"
+                status_id:
+                  type: integer
+                  example: 1
+                employee_id:
+                  type: integer
+                  example: 1
+                priority_id:
+                  type: integer
+                  example: 1
+      responses:
+        "201":
+          description: New task created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "შექმენით readme ფაილი"
+                    description:
+                      type: string
+                      example: "აღწერეთ შესრულებული დავალება რიდმი ფაილით"
+                    due_date:
+                      type: number
+                      format: date-time
+                      example: "2025-12-31"
+                    status:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Todo"
+                    priority:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "High"
+                        icon:
+                          type: string
+                    department:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "IT"
+                    employee:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "ლადო"
+                        surname:
+                          type: string
+                          example: "გაგა"
+                        avatar:
+                          type: string
+                        department_id:
+                          type: integer
+                          example: 1
+        "422":
+          $ref: "blocks/validation-error.yml"
+        "401":
+          $ref: "blocks/token-required-error.yml"
+  /tasks/{id}:
+    get:
+      tags:
+        - tasks
+      security:
+        - bearerAuth: []
+      summary: Retrieve a single task by id
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            example: 1
+      responses:
+        "200":
+          description: detailed information about task
+          content:
+            application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "შესარჩევი დავალება"
+                    description:
+                      type: string
+                      example: "შექმენით ვებ გვერდი დიზაინის მიხედვით"
+                    due_date:
+                      type: number
+                      format: date-time
+                      example: "2025-12-31"
+                    status:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "Todo"
+                    priority:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "High"
+                        icon:
+                          type: string
+                    department:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "IT"
+                    employee:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "ლადო"
+                        surname:
+                          type: string
+                          example: "გაგა"
+                        avatar:
+                          type: string
+                        department_id:
+                          type: integer
+                          example: 1
+        "401":
+          $ref: "blocks/token-required-error.yml"
+        "404":
+          $ref: "blocks/not-found-error.yml"
+    put:
+      tags:
+        - tasks
+      security:
+        - bearerAuth: []
+      summary: Change status for a task
+      parameters:
+        - $ref: '#/components/parameters/AcceptHeader'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status_id:
+                  type: integer
+                  example: 2
+
+      responses:
+        "200":
+          description: update status of task
+          content:
+            application/json:
+                schema:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    name:
+                      type: string
+                      example: "შესარჩევი დავალება"
+                    description:
+                      type: string
+                      example: "შექმენით ვებ გვერდი დიზაინის მიხედვით"
+                    due_date:
+                      type: number
+                      format: date-time
+                      example: "2025-12-31"
+                    status:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 2
+                        name:
+                          type: string
+                          example: "In progress"
+                    priority:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "High"
+                        icon:
+                          type: string
+                    department:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "IT"
+                    employee:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        name:
+                          type: string
+                          example: "ლადო"
+                        surname:
+                          type: string
+                          example: "გაგა"
+                        avatar:
+                          type: string
+                        department_id:
+                          type: integer
+                          example: 1
+        "401":
+          $ref: "blocks/token-required-error.yml"
+        "404":
+          $ref: "blocks/not-found-error.yml"
+

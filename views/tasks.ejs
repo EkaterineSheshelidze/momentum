@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/tasks.css">
+</head>
+<body>
+
+    <%- include('header') %>
+
+    <div class="container">
+        <h3 class="page-title">დავალებების გვერდი</h3>
+
+        <div class="dropdown-container">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    დეპარტამენტი
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    პრიორიტეტი
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    თანამშრომელი
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="selected-container">
+            <div class="selected-item">
+                <p>მაღალი</p>
+                <button type="button" class="remove-item"><ion-icon name="reorder-two-outline"></ion-icon></button>
+            </div>
+            <div class="selected-item" style="border:none">
+                <button type="button" class="empty-btn">გასუფთავება</button>
+            </div>
+
+        </div>
+
+        <div class="task-container">
+            <div class="category-container category-todo" style="margin-right: 50px;">
+                <div class="category-title">
+                    <h6>დასაწყები</h6>
+                </div>
+                <div class="task">
+                    <div class="top">
+                        <div class="task-priority mid">
+                            <ion-icon name="reorder-two-outline"></ion-icon>
+                            <p>საშუალო</p>
+                        </div>
+                        <div class="task-department">
+                            <p>დიზაინი</p>
+                        </div>
+                        <div class="task-date">
+                            <p>22 იანვ, 2022</p>
+                        </div>
+                    </div>
+
+                    <div class="task-desc">
+                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>
+                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>
+                    </div>
+                    <div class="bottom">
+                        <div class="task-employee">
+                            <img src="images/cat.jpeg">
+                        </div>
+                        <div class="task-comments">
+                            <ion-icon name="chatbox-outline"></ion-icon>
+                            <p>8</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category-container category-progress" style="margin-right: 50px;">
+                <div class="category-title">
+                    <h6>პროგრესში</h6>
+                </div>
+                <div class="task">
+                    <div class="top">
+                        <div class="task-priority high">
+                            <ion-icon name="chevron-up-outline"></ion-icon>
+                            <p>მაღალი</p>
+                        </div>
+                        <div class="task-department">
+                            <p>დიზაინი</p>
+                        </div>
+                        <div class="task-date">
+                            <p>22 იანვ, 2022</p>
+                        </div>
+                    </div>
+
+                    <div class="task-desc">
+                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>
+                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>
+                    </div>
+                    <div class="bottom">
+                        <div class="task-employee">
+                            <img src="images/cat.jpeg">
+                        </div>
+                        <div class="task-comments">
+                            <ion-icon name="chatbox-outline"></ion-icon>
+                            <p>8</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category-container category-ready" style="margin-right: 50px;">
+                <div class="category-title">
+                    <h6>მზად ტესტირებისთვის</h6>
+                </div>
+                <div class="task">
+                    <div class="top">
+                        <div class="task-priority low">
+                            <ion-icon name="chevron-down-outline"></ion-icon>
+                            <p>დაბალი</p>
+                        </div>
+                        <div class="task-department">
+                            <p>დიზაინი</p>
+                        </div>
+                        <div class="task-date">
+                            <p>22 იანვ, 2022</p>
+                        </div>
+                    </div>
+
+                    <div class="task-desc">
+                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>
+                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>
+                    </div>
+                    <div class="bottom">
+                        <div class="task-employee">
+                            <img src="images/cat.jpeg">
+                        </div>
+                        <div class="task-comments">
+                            <ion-icon name="chatbox-outline"></ion-icon>
+                            <p>8</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="category-container category-done">
+                <div class="category-title">
+                    <h6>დასრულებული</h6>
+                </div>
+                <div class="task">
+                    <div class="top">
+                        <div class="task-priority mid">
+                            <ion-icon name="reorder-two-outline"></ion-icon>
+                            <p>საშუალო</p>
+                        </div>
+                        <div class="task-department">
+                            <p>დიზაინი</p>
+                        </div>
+                        <div class="task-date">
+                            <p>22 იანვ, 2022</p>
+                        </div>
+                    </div>
+
+                    <div class="task-desc">
+                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>
+                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>
+                    </div>
+                    <div class="bottom">
+                        <div class="task-employee">
+                            <img src="images/cat.jpeg">
+                        </div>
+                        <div class="task-comments">
+                            <ion-icon name="chatbox-outline"></ion-icon>
+                            <p>8</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
