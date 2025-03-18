@@ -7,9 +7,45 @@
     --ready-color: #FF006E;
     --done-color: #3A86FF;
     --design-color: #FF66A8;
+    --marketing-color: #FD9A6A;
+    --logistics-color: #89B6FF;
+    --infoTech-color: #FFD86D;
     --prior-low: #08A508;
     --prior-mid: #FFBE0B;
     --prior-high: #FA4D4D;
+}
+
+/* firago-latin-400-normal */
+@font-face {
+    font-family: 'FiraGO';
+    font-style: normal;
+    font-display: auto;
+    font-weight: 400;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/firago@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/firago@latest/latin-400-normal.woff) format('woff');
+}
+
+/* firago-latin-500-normal */
+@font-face {
+    font-family: 'FiraGO';
+    font-style: normal;
+    font-display: auto;
+    font-weight: 500;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/firago@latest/latin-500-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/firago@latest/latin-500-normal.woff) format('woff');
+}
+
+/* firago-latin-600-normal */
+@font-face {
+    font-family: 'FiraGO';
+    font-style: normal;
+    font-display: auto;
+    font-weight: 600;
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/firago@latest/latin-600-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/firago@latest/latin-600-normal.woff) format('woff');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'FiraGO';
 }
 
 .navbar{
@@ -63,6 +99,7 @@
 .page-title{
     font-size: 34px;
     color: var(--title-color);
+    font-weight: 600;
 }
 
 .dropdown-container{
@@ -82,6 +119,99 @@
     border: none;
 }
 
+.dropdown-menu{
+    border-color: var(--btn-main);
+    width: 688px;
+    padding: 40px 30px 20px 30px;
+    position: absolute;
+}
+
+.form-check{
+    margin-bottom: 15px;
+}
+
+.form-check label{
+    margin-left: 10px;
+}
+
+.dropdown.priority .dropdown-menu{
+    left: -267px !important;
+}
+
+.dropdown.college .dropdown-menu{
+    left: -519px !important;
+}
+
+.dropdown.college img{
+    width: 28px;
+    height: 28px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.dropdown-container .my-btn{
+    padding: 8px 20px;
+    border-radius: 20px;
+}
+
+/* Default button style */
+.dropdown-toggle {
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Hover effect: purple background */
+.dropdown-toggle:hover {
+    background-color: white !important;
+    color: var(--btn-main) !important; /* White text on hover */
+}
+
+/* Focus effect: white background, purple border */
+.dropdown-toggle:focus {
+    background-color: white !important;
+    color: var(--btn-main) !important;
+}
+
+/*!* Style the checkbox *!*/
+/*input[type="checkbox"] {*/
+/*    width: 20px;*/
+/*    height: 20px;*/
+/*    appearance: none;*/
+/*    -webkit-appearance: none;*/
+/*    border: 2px solid black;*/
+/*    border-radius: 4px;*/
+/*    background-color: white; !* Always white background *!*/
+/*    position: relative;*/
+/*    cursor: pointer;*/
+/*    vertical-align: middle; !* Aligns with label *!*/
+/*}*/
+
+/*!* Checkmark style *!*/
+/*input[type="checkbox"]:checked::after {*/
+/*    content: '';*/
+/*    position: absolute;*/
+/*    top: 4px;*/
+/*    left: 7px;*/
+/*    width: 5px;*/
+/*    height: 10px;*/
+/*    border: solid black;*/
+/*    border-width: 0 2px 2px 0;*/
+/*    transform: rotate(45deg);*/
+/*}*/
+
+/*!* Align the label text properly *!*/
+/*.form-check {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*}*/
+
+/*!* Optional hover effect *!*/
+/*input[type="checkbox"]:hover {*/
+/*    border-color: gray;*/
+/*}*/
+
+
+
+
 .selected-container{
     display: flex;
     margin: 30px 0;
@@ -95,11 +225,15 @@
     color: #343A40;
     padding: 6px 10px;
     margin-right: 4px;
+    font-size: 14px;
 }
+
 .selected-item .remove-item{
+    display: flex;
     background: none;
     border: none;
     height: inherit;
+    margin-left: 4px;
 }
 
 .selected-item .empty-btn{
@@ -162,6 +296,8 @@
     border-radius: 15px;
     margin-top: 30px;
     padding: 20px;
+    outline: 2px solid transparent;
+    transition: outline 0.3s ease, outline-color 0.3s ease;
 }
 
 .task .top{
@@ -200,8 +336,7 @@
 }
 
 .category-container.category-todo .task:hover{
-    border: 2px solid var(--todo-color);
-    transition: 0.5s;
+    outline: 2px solid var(--todo-color);
 }
 
 .category-container.category-progress .task{
@@ -209,8 +344,7 @@
 }
 
 .category-container.category-progress .task:hover{
-    border: 2px solid var(--progress-color);
-    transition: 0.5s;
+    outline: 2px solid var(--progress-color);
 }
 
 .category-container.category-ready .task{
@@ -218,8 +352,7 @@
 }
 
 .category-container.category-ready .task:hover{
-    border: 2px solid var(--ready-color);
-    transition: 0.5s;
+    outline: 2px solid var(--ready-color);
 }
 
 .category-container.category-done .task{
@@ -227,8 +360,7 @@
 }
 
 .category-container.category-done .task:hover{
-    border: 2px solid var(--done-color);
-    transition: 0.5s;
+    outline: 2px solid var(--done-color);
 }
 
 .task .task-priority p{
@@ -248,7 +380,7 @@
     color: #fff;
     border: 1px solid var(--design-color);
     border-radius: 15px;
-    padding: 4px 12px;
+    padding: 5px 9px;
 }
 
 .task .task-department p{
@@ -273,7 +405,7 @@
 }
 
 .task .task-desc .title{
-    font-weight: bold;
+    font-weight: 500;
     margin-bottom: 10px;
     font-size: 15px;
 }
@@ -310,3 +442,4 @@
     font-size: 14px;
     margin: auto;
 }
+
