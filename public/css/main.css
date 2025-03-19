@@ -59,6 +59,7 @@
     display: inline-flex;
     align-items: center;
     font-size: 16px;
+    text-decoration: none;
 }
 
 .navbar .buttons{
@@ -80,6 +81,7 @@
 .outline-btn{
     border: 1px solid var(--btn-main);
     background: none;
+    color: black;
 }
 
 .outline-btn:hover{
@@ -420,7 +422,7 @@
     justify-content: space-between;
 }
 
-.task .task-employee img{
+.task .task-college img{
     display: inline-block;
     height: 31px;
     width: 31px;
@@ -443,3 +445,143 @@
     margin: auto;
 }
 
+body{
+    position: relative;
+}
+
+.add-college-container{
+    background-color: white;
+    padding: 40px 50px 60px 50px;
+    position: absolute;
+    top: 118px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 913px;
+    height: 766px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 2;
+    text-align: center;
+}
+
+.add-college-container.show{
+    display: block;
+}
+
+.blur{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blurs the background */
+    z-index: 1; /* Ensures it stays above other elements */
+}
+
+.blur.show{
+    display: block;
+}
+
+/* Close button */
+.add-college-container .close-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.add-college-container .close-btn ion-icon{
+    height: 40px;
+    width: 40px;
+}
+
+    /* Title */
+.add-college-container .form-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 25px 0 45px;
+}
+
+/* Input fields */
+.add-college-container .row {
+    display: flex;
+    gap: 20px;
+}
+
+.add-college-container .col {
+    flex: 1;
+    text-align: left;
+    margin-bottom: 45px;
+}
+
+.add-college-container input, select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.add-college-container small {
+    color: #666;
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+}
+
+.add-college-container .form-select{
+    width: 384px;
+    margin-bottom: 50px;
+}
+
+/* Buttons */
+.add-college-container .form-buttons {
+    display: flex;
+    justify-content: right;
+    gap: 22px;
+    margin-top: 20px;
+}
+
+/* Hide default file input */
+#avatar {
+    display: none;
+}
+
+/* Avatar container */
+.avatar-upload{
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 45px;
+}
+.avatar-preview {
+    display: flex;
+    align-items: center;
+    width: 813px;
+    height: 120px;
+    z-index: 1;
+}
+
+/* Circular image preview */
+.avatar-preview img {
+    position: absolute;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    z-index: 1;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+/* Custom upload button */
+.upload-btn {
+    width: 100%;
+    height: 100%;
+    border: 1px dotted #CED4DA;
+    border-radius: 8px;
+    z-index: 2;
+}

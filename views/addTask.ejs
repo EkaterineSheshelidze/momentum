@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <%- include('header') %>
+
+    <div class="container">
+        <div class="add-task-container">
+            <h2 class="form-title">შექმენი ახალი დავალება</h2>
+            <form>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="firstname">სახელი*</label>
+                        <input type="text" id="firstname" class="form-control" minlength="3" required>
+                        <small>✔ მინიმუმ 2 სიმბოლო</small>
+                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                    </div>
+
+                    <div class="col">
+                        <label for="lastname">გვარი*</label>
+                        <input type="text" id="lastname" class="form-control" minlength="3" required>
+                        <small>✔ მინიმუმ 2 სიმბოლო</small>
+                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="firstname">სახელი*</label>
+                        <input type="text" id="firstname" class="form-control" minlength="3" required>
+                        <small>✔ მინიმუმ 2 სიმბოლო</small>
+                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                    </div>
+
+                    <div class="col">
+                        <label for="lastname">გვარი*</label>
+                        <input type="text" id="lastname" class="form-control" minlength="3" required>
+                        <small>✔ მინიმუმ 2 სიმბოლო</small>
+                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="firstname">სახელი*</label>
+                        <input type="text" id="firstname" class="form-control" minlength="3" required>
+                        <small>✔ მინიმუმ 2 სიმბოლო</small>
+                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                    </div>
+
+                    <div class="col">
+                        <label for="lastname">გვარი*</label>
+                        <input type="text" id="lastname" class="form-control" minlength="3" required>
+                        <small>✔ მინიმუმ 2 სიმბოლო</small>
+                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="text-start">
+                        <label for="departments">დეპარტამენტი*</label>
+                        <select id="departments" class="form-select">
+                            <option selected disabled>დიზაინის დეპარტამენტი</option>
+                            <option value="it">დიზაინის დეპარტამენტი</option>
+                            <option value="it">ლოჯისტიკის დეპარტამენტი</option>
+                            <option value="hr">მარკეტინგის დეპარტამენტი</option>
+                            <option value="sales">IT დეპარტამენტი</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit" class="my-btn filled-btn">დამატება</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+    <script src="/js/main.js"></script>
+    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

@@ -67,7 +67,7 @@ app.get('/task', async (req, res) => {
     }
 });
 
-app.get('/add', async (req, res) => {
+app.get('/add-task', async (req, res) => {
     try {
         // Pass the data to the EJS template
         res.render('addTask', { title: "Add task" });
