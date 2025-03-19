@@ -140,11 +140,11 @@
     left: -267px !important;
 }
 
-.dropdown.college .dropdown-menu{
+.dropdown.employee .dropdown-menu{
     left: -519px !important;
 }
 
-.dropdown.college img{
+.dropdown.employee img{
     width: 28px;
     height: 28px;
     margin-right: 5px;
@@ -422,7 +422,7 @@
     justify-content: space-between;
 }
 
-.task .task-college img{
+.task .task-employee img{
     display: inline-block;
     height: 31px;
     width: 31px;
@@ -449,7 +449,7 @@ body{
     position: relative;
 }
 
-.add-college-container{
+.add-employee-container{
     background-color: white;
     padding: 40px 50px 60px 50px;
     position: absolute;
@@ -465,7 +465,7 @@ body{
     text-align: center;
 }
 
-.add-college-container.show{
+.add-employee-container.show{
     display: block;
 }
 
@@ -486,37 +486,37 @@ body{
 }
 
 /* Close button */
-.add-college-container .close-btn {
+.add-employee-container .close-btn {
     border: none;
     background: none;
     cursor: pointer;
 }
 
-.add-college-container .close-btn ion-icon{
+.add-employee-container .close-btn ion-icon{
     height: 40px;
     width: 40px;
 }
 
     /* Title */
-.add-college-container .form-title {
+.add-employee-container .form-title {
     font-size: 32px;
     font-weight: bold;
     margin: 25px 0 45px;
 }
 
 /* Input fields */
-.add-college-container .row {
+.add-employee-container .row {
     display: flex;
     gap: 20px;
 }
 
-.add-college-container .col {
+.add-employee-container .col {
     flex: 1;
     text-align: left;
     margin-bottom: 45px;
 }
 
-.add-college-container input, select {
+.add-employee-container input, select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -524,20 +524,20 @@ body{
     font-size: 14px;
 }
 
-.add-college-container small {
+.add-employee-container small {
     color: #666;
     font-size: 12px;
     display: block;
     margin-top: 5px;
 }
 
-.add-college-container .form-select{
+.add-employee-container .form-select{
     width: 384px;
     margin-bottom: 50px;
 }
 
 /* Buttons */
-.add-college-container .form-buttons {
+.add-employee-container .form-buttons {
     display: flex;
     justify-content: right;
     gap: 22px;
@@ -585,3 +585,145 @@ body{
     border-radius: 8px;
     z-index: 2;
 }
+
+.add-task-container .form-title{
+    font-size: 34px;
+    margin-bottom: 30px;
+}
+
+.add-task-container form{
+    display: flex;
+    flex-direction: column;
+    border: 0.3px solid #DDD2FF;
+    background-color: #FBF9FFA6;
+    width: 1684px;
+    height: 958px;
+    padding: 65px 55px;
+    border-radius: 4px;
+    gap: 55px;
+}
+
+.add-task-container form small{
+    display: block;
+    color: #6C757D;
+}
+
+.add-task-container form input,
+.add-task-container form select{
+    width: 550px;
+    height: 45px;
+    margin-bottom: 4px;
+}
+
+.add-task-container form label{
+    margin-bottom: 5px;
+}
+
+.add-task-container form .row .text-start{
+    width: 550px;
+    display: flex;
+    gap: 30px;
+}
+
+.add-task-container form #status{
+    width: 259px;
+    display: block;
+}
+
+.add-task-container form .deadline{
+    margin-left: 247px;
+}
+
+.add-task-container form #desc{
+    height: 133px;
+}
+
+.add-task-container form #deadline{
+    width: 318px;
+}
+
+.add-task-container form .my-btn{
+    margin-right: 224px;
+    margin-top: 80px;
+}
+
+.add-task-container form .custom-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.add-task-container form .custom-dropdown p{
+    margin-bottom: 5px;
+}
+
+.add-task-container form .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid  #DDD2FF;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+    height: 45px;
+    width: 550px;
+}
+
+.add-task-container form .dropdown-toggle.priority{
+    width: 259px;
+}
+
+.add-task-container form .custom-dropdown.employee .dropdown-toggle img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.add-task-container form .custom-dropdown.priority .dropdown-toggle ion-icon {
+    width: 25px;
+    height: 25px;
+    margin-right: 7px;
+}
+
+.add-task-container form .custom-dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid  #DDD2FF;
+    list-style: none;
+    padding: 10px;
+    width: 550px;
+}
+
+.add-task-container form .custom-dropdown .dropdown-menu.priority{
+    width: 259px;
+}
+
+.add-task-container form .dropdown-menu li {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.add-task-container form .custom-dropdown .dropdown-menu.show{
+    display: block;
+}
+
+.add-task-container form .custom-dropdown.employee .dropdown-menu li img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.add-task-container form .custom-dropdown.priority .dropdown-menu li ion-icon{
+    width: 25px;
+    height: 25px;
+    margin-right: 7px;
+}
+
+.add-task-container form .dropdown-menu li:hover {
+    background: #f0f0f0;
+}
+

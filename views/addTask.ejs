@@ -18,70 +18,107 @@
             <form>
                 <div class="row mb-3">
                     <div class="col">
-                        <label for="firstname">სახელი*</label>
-                        <input type="text" id="firstname" class="form-control" minlength="3" required>
-                        <small>✔ მინიმუმ 2 სიმბოლო</small>
-                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                        <label for="title">სათაური*</label>
+                        <input type="text" id="title" class="form-control" minlength="2" required>
+                        <small>მინიმუმ 2 სიმბოლო</small>
+                        <small>მაქსომუმ 255 სიმბოლო</small>
                     </div>
 
                     <div class="col">
-                        <label for="lastname">გვარი*</label>
-                        <input type="text" id="lastname" class="form-control" minlength="3" required>
-                        <small>✔ მინიმუმ 2 სიმბოლო</small>
-                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="firstname">სახელი*</label>
-                        <input type="text" id="firstname" class="form-control" minlength="3" required>
-                        <small>✔ მინიმუმ 2 სიმბოლო</small>
-                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
-                    </div>
-
-                    <div class="col">
-                        <label for="lastname">გვარი*</label>
-                        <input type="text" id="lastname" class="form-control" minlength="3" required>
-                        <small>✔ მინიმუმ 2 სიმბოლო</small>
-                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
-                    </div>
-                </div>
-
-                <div class="row mb-3">
-                    <div class="col">
-                        <label for="firstname">სახელი*</label>
-                        <input type="text" id="firstname" class="form-control" minlength="3" required>
-                        <small>✔ მინიმუმ 2 სიმბოლო</small>
-                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
-                    </div>
-
-                    <div class="col">
-                        <label for="lastname">გვარი*</label>
-                        <input type="text" id="lastname" class="form-control" minlength="3" required>
-                        <small>✔ მინიმუმ 2 სიმბოლო</small>
-                        <small>✔ მაქსომუმ 255 სიმბოლო</small>
-                    </div>
-                </div>
-
-
-
-                <div class="form-group">
-                    <div class="text-start">
                         <label for="departments">დეპარტამენტი*</label>
                         <select id="departments" class="form-select">
                             <option selected disabled>დიზაინის დეპარტამენტი</option>
-                            <option value="it">დიზაინის დეპარტამენტი</option>
-                            <option value="it">ლოჯისტიკის დეპარტამენტი</option>
-                            <option value="hr">მარკეტინგის დეპარტამენტი</option>
-                            <option value="sales">IT დეპარტამენტი</option>
+                            <option value="design">დიზაინის დეპარტამენტი</option>
+                            <option value="logistics">ლოჯისტიკის დეპარტამენტი</option>
+                            <option value="marketing">მარკეტინგის დეპარტამენტი</option>
+                            <option value="it">IT დეპარტამენტი</option>
                         </select>
                     </div>
-
                 </div>
 
-                <div class="form-buttons">
-                    <button type="submit" class="my-btn filled-btn">დამატება</button>
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="desc">აღწერა</label>
+                        <input type="text" id="desc" class="form-control" minlength="2" required>
+                        <small>მინიმუმ 2 სიმბოლო</small>
+                        <small>მაქსომუმ 255 სიმბოლო</small>
+                    </div>
+
+                    <div class="col">
+                        <div class="custom-dropdown employee">
+                            <p>პასუხისმგებელი თანამშრომელი</p>
+                            <button type="button" class="dropdown-toggle" id="dropdown-btn">
+                                <img style="display: none" src="images/cat.jpeg" alt="Selected" id="selected-img">
+                                <span style="margin-right: 5px" id="selected-text">აირჩიეთ</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li data-value="it">
+                                    <img src="images/cat.jpeg" alt="IT">
+                                    <span>გიო ბაგრატიონი</span>
+                                </li>
+                                <li data-value="logistics">
+                                    <img src="images/cat.jpeg" alt="Logistics">
+                                    <span>ლალი ბაგრატიონი</span>
+                                </li>
+                                <li data-value="marketing">
+                                    <img src="images/cat.jpeg" alt="Marketing">
+                                    <span>ლუკა ბაგრატიონი</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Hidden input to store selected value -->
+                        <input type="hidden" name="department" id="selected-value">
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="text-start">
+                        <div class="col">
+                            <div class="custom-dropdown priority">
+                                <p>პრიორიტეტი</p>
+                                <button type="button" class="dropdown-toggle priority" id="dropdown-btn-priority">
+                                    <ion-icon style="display: none; color: var(--prior-low)" id="selected-icon"></ion-icon>
+                                    <span style="margin-right: 5px" id="selected-priority">აირჩიეთ</span>
+                                </button>
+                                <ul class="dropdown-menu priority">
+                                    <li data-value="it">
+                                        <ion-icon name="chevron-down-outline"  style="color: var(--prior-low)"></ion-icon>
+                                        <span>დაბალი</span>
+                                    </li>
+                                    <li data-value="logistics">
+                                        <ion-icon name="reorder-two-outline" style="color: var(--prior-mid)"></ion-icon>
+                                        <span>საშუალო</span>
+                                    </li>
+                                    <li data-value="marketing">
+                                        <ion-icon name="chevron-up-outline" style="color: var(--prior-high)"></ion-icon>
+                                        <span>მაღალი</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Hidden input to store selected value -->
+                            <input type="hidden" name="department" id="selected-priority">
+                        </div>
+                        <div class="col">
+                            <label for="status">სტატუსი*</label>
+                            <select id="status" class="form-select">
+                                <option selected disabled></option>
+                                <option value="it">დასაწყები</option>
+                                <option value="it">პროგრესში</option>
+                                <option value="hr">მზად ტესტირებისთვის</option>
+                                <option value="sales">დასრულებული</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col deadline">
+                        <label for="deadline">დედლაინი*</label>
+                        <input type="date" id="deadline" class="form-control">
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="my-btn filled-btn">დავალების შექმნა</button>
                 </div>
             </form>
 
