@@ -4,10 +4,17 @@ const multer = require('multer');
 const fs = require('fs');
 const FormData = require('form-data');
 const path = require('path');
+const moment = require('moment');
+require('moment/locale/ka');
+
 
 require('dotenv').config();
 
 const app = express();
+
+app.locals.moment = moment;
+
+
 
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');

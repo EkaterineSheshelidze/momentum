@@ -335,17 +335,17 @@
     gap: 2px;
 }
 
-.task-priority.Low{
+.task-priority.priority1{
     color: var(--prior-Low);
     border: 1px solid var(--prior-Low);
 }
 
-.task-priority.Medium{
+.task-priority.priority2{
     color: var(--prior-Medium);
     border: 1px solid var(--prior-Medium);
 }
 
-.task-priority.High{
+.task-priority.priority3{
     color: var(--prior-High);
     border: 1px solid var(--prior-High);
 }
@@ -399,6 +399,11 @@
     border-radius: 15px;
     height: 24px;
     width: 88px;
+    text-align: left; /* Ensures text starts from the left */
+    white-space: nowrap; /* Prevents text from wrapping */
+    overflow: hidden; /* Hides the overflow */
+    text-overflow: ellipsis; /* Adds "..." at the end */
+    direction: ltr; /* Ensures left-to-right text flow */
 }
 
 .task-department p{
@@ -413,13 +418,23 @@
 
 .task .task-date p {
     font-size: 12px;
-    margin: auto;
+    margin: 0;  /* Aligns text properly */
     font-weight: bold;
+    white-space: normal;      /* Allows text wrapping */
+    word-wrap: break-word;   /* Breaks long words */
+    overflow-wrap: break-word; /* Breaks words at appropriate points */
+    overflow: hidden;       /* Prevents overflowing content */
+    max-height: 100%;       /* Ensures content stays within container */
 }
 
-.task .task-desc{
+.task .task-desc {
     margin: 28px auto;
     width: 93%;
+    height: 76px;
+    text-align: left;
+    white-space: normal;   /* Allows wrapping */
+    overflow-wrap: break-word;
+    overflow: hidden;     /* Prevent overflow */
 }
 
 .task .task-desc .title{
