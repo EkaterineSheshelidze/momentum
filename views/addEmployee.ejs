@@ -3,48 +3,48 @@
 <div class="add-employee-container">
     <div class="text-end"><button class="close-btn"><ion-icon name="close-circle-outline"></ion-icon></button></div>
     <h2 class="form-title">თანამშრომლის დამატება</h2>
-    <form>
+    <form method="post" action="/add-employee" enctype="multipart/form-data" id="employee-form">
         <div class="row mb-3">
             <div class="col">
-                <label for="firstname">სახელი*</label>
-                <input type="text" id="firstname" class="form-control" minlength="2" required>
+                <label for="name">სახელი*</label>
+                <input type="text" id="name" name="name" class="form-control" minlength="2" required>
                 <small>✔ მინიმუმ 2 სიმბოლო</small>
-                <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                <small>✔ მაქსიმუმ 255 სიმბოლო</small>
             </div>
 
             <div class="col">
-                <label for="lastname">გვარი*</label>
-                <input type="text" id="lastname" class="form-control" minlength="2" required>
+                <label for="surname">გვარი*</label>
+                <input type="text" id="surname" name="surname" class="form-control" minlength="2" required>
                 <small>✔ მინიმუმ 2 სიმბოლო</small>
-                <small>✔ მაქსომუმ 255 სიმბოლო</small>
+                <small>✔ მაქსიმუმ 255 სიმბოლო</small>
             </div>
         </div>
 
         <div class="avatar-upload">
             <div class="text-start"><label for="avatar">ავატარი*</label></div>
             <div class="avatar-preview">
-                <img id="avatarPreview" src="images/cat.jpeg" alt="Avatar">
+                <img id="avatarPreview" src="images/default.jpg" alt="Avatar">
                 <label for="avatar" class="upload-btn"></label>
-                <input type="file" id="avatar" accept="image/*">
+                <input type="file" id="avatar" name="avatar" accept=".jpg, .jpeg, .png">
             </div>
         </div>
 
         <div class="form-group">
             <div class="text-start">
-                <label for="departments">დეპარტამენტი*</label>
-                <select id="departments" class="form-select">
+                <label for="department">დეპარტამენტი*</label>
+                <select id="department" name="department" class="form-select" required>
                     <option selected disabled>დიზაინის დეპარტამენტი</option>
-                    <option value="it">დიზაინის დეპარტამენტი</option>
-                    <option value="it">ლოჯისტიკის დეპარტამენტი</option>
-                    <option value="hr">მარკეტინგის დეპარტამენტი</option>
-                    <option value="sales">IT დეპარტამენტი</option>
+                    <% departments.forEach(dep => {%>
+                        <option value="<%= dep.id%>"><%= dep.name %></option>
+                    <%});%>
                 </select>
+
             </div>
 
         </div>
 
         <div class="form-buttons">
-            <button type="button" class="my-btn outline-btn">გაუქმება</button>
+            <button type="button" class="my-btn outline-btn" id="clear-btn">გაუქმება</button>
             <button type="submit" class="my-btn filled-btn">დამატება</button>
         </div>
     </form>

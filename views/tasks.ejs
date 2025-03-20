@@ -12,7 +12,7 @@
 
     <%- include('header') %>
 
-    <div class="container">
+    <div class="my-container">
         <h3 class="page-title">დავალებების გვერდი</h3>
 
         <div class="dropdown-container">
@@ -22,30 +22,14 @@
                 </button>
                 <div class="dropdown-menu p-3">
                     <form id="filterForm">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="marketing" id="marketing">
-                            <label class="form-check-label" for="marketing">
-                                მარკეტინგის დეპარტამენტი
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="design" id="design">
-                            <label class="form-check-label" for="design">
-                                დიზაინის დეპარტამენტი
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="logistics" id="logistics">
-                            <label class="form-check-label" for="logistics">
-                                ლოჯისტიკის დეპარტამენტი
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="it" id="it">
-                            <label class="form-check-label" for="it">
-                                IT დეპარტამენტი
-                            </label>
-                        </div>
+                        <% departments.forEach(dep => { %>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="<%= dep.id %>">
+                                <label class="form-check-label" for="<%= dep.name %>">
+                                    <%= dep.name %>
+                                </label>
+                            </div>
+                        <% }); %>
                         <div class="text-end">
                             <button type="submit" class="my-btn filled-btn">არჩევა</button>
                         </div>
@@ -58,57 +42,35 @@
                 </button>
                 <div class="dropdown-menu p-3">
                     <form id="filterForm">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="low" id="low">
-                            <label class="form-check-label" for="low">
-                                დაბალი
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="mid" id="mid">
-                            <label class="form-check-label" for="mid">
-                                საშუალო
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="high" id="high">
-                            <label class="form-check-label" for="high">
-                                მაღალი
-                            </label>
-                        </div>
+                        <% priorities.forEach(prior => { %>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="<%= prior.id %>" id="<%= prior.name %>">
+                                <label class="form-check-label" for="<%= prior.name %>">
+                                    <%= prior.name %>
+                                </label>
+                            </div>
+                        <% }); %>
                         <div class="text-end">
                             <button type="submit" class="my-btn filled-btn">არჩევა</button>
                         </div>
                     </form>
                 </div>
             </div>
-            <div class="dropdown college">
+            <div class="dropdown employee">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     თანამშრომელი
                 </button>
                 <div class="dropdown-menu p-3">
                     <form id="filterForm">
+                        <% employees.forEach(emp => { %>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="option1" id="option1">
-                            <label class="form-check-label" for="option1">
-                                <img src="images/cat.jpeg" alt="prof">
-                                ელაია ბაგრატიონი
+                            <input class="form-check-input" type="checkbox" value="<%= emp.id %>>">
+                            <label class="form-check-label">
+                                <img src="<%= emp.avatar %>" alt="prof">
+                                <%= emp.name + " " + emp.surname %>
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="option2" id="option2">
-                            <label class="form-check-label" for="option2">
-                                <img src="images/cat.jpeg" alt="prof">
-                                გიორგი კეკელიძე
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="option3" id="option3">
-                            <label class="form-check-label" for="option3">
-                                <img src="images/cat.jpeg" alt="prof">
-                                მარიამ მაჭავარიანი
-                            </label>
-                        </div>
+                        <% }); %>
                         <div class="text-end">
                             <button type="submit" class="my-btn filled-btn">არჩევა</button>
                         </div>
@@ -117,15 +79,16 @@
             </div>
         </div>
 
-        <div class="selected-container">
-            <div class="selected-item">
-                <p>მაღალი</p>
-                <button type="button" class="remove-item"><ion-icon name="close-outline"></ion-icon></button>
+        <div class="selected">
+            <div class="selected-container">
+                <div class="selected-item">
+                    <p>მაღალი</p>
+                    <button type="button" class="remove-item"><ion-icon name="close-outline"></ion-icon></button>
+                </div>
+                <div class="selected-item" style="border:none">
+                    <button type="button" class="empty-btn">გასუფთავება</button>
+                </div>
             </div>
-            <div class="selected-item" style="border:none">
-                <button type="button" class="empty-btn">გასუფთავება</button>
-            </div>
-
         </div>
 
         <div class="task-container">
@@ -133,133 +96,140 @@
                 <div class="category-title">
                     <h6>დასაწყები</h6>
                 </div>
-                <div class="task">
-                    <div class="top">
-                        <div class="task-priority mid">
-                            <ion-icon name="reorder-two-outline"></ion-icon>
-                            <p>საშუალო</p>
+                <% tasks.forEach(task => {
+                    if(task.status.id == 2){ %>
+                    <div class="task">
+                        <a class="task-link" href="/task">
+                        <div class="top">
+                            <div class="task-priority <%= task.priority.name %>">
+                                <ion-icon name="reorder-two-outline"></ion-icon>
+                                <p><%= task.priority.name %></p>
+                            </div>
+                            <div class="task-department">
+                                <p><%= task.department.name %></p>
+                            </div>
+                            <div class="task-date">
+                                <p><%= task.due_date %></p>
+                            </div>
                         </div>
-                        <div class="task-department">
-                            <p>დიზაინი</p>
-                        </div>
-                        <div class="task-date">
-                            <p>22 იანვ, 2022</p>
-                        </div>
-                    </div>
 
-                    <div class="task-desc">
-                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>
-                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>
-                    </div>
-                    <div class="bottom">
-                        <div class="task-college">
-                            <img src="images/cat.jpeg">
+                        <div class="task-desc">
+                            <p class="title"><%= task.name %></p>
+                            <p class="short-desc"><%= task.description %></p>
                         </div>
-                        <div class="task-comments">
-                            <ion-icon name="chatbox-outline"></ion-icon>
-                            <p>8</p>
+
+                        <div class="bottom">
+                            <div class="task-employee">
+                                <img src="<%= task.employee.avatar %>">
+                            </div>
+                            <div class="task-comments">
+                                <ion-icon name="chatbox-outline"></ion-icon>
+                                <p>8</p>
+                            </div>
                         </div>
+                    </a>
                     </div>
-                </div>
+                <% }
+                });%>
             </div>
             <div class="category-container category-progress" style="margin-right: 50px;">
                 <div class="category-title">
                     <h6>პროგრესში</h6>
                 </div>
-                <div class="task">
-                    <div class="top">
-                        <div class="task-priority high">
-                            <ion-icon name="chevron-up-outline"></ion-icon>
-                            <p>მაღალი</p>
-                        </div>
-                        <div class="task-department">
-                            <p>დიზაინი</p>
-                        </div>
-                        <div class="task-date">
-                            <p>22 იანვ, 2022</p>
-                        </div>
-                    </div>
+<!--                <div class="task">-->
+<!--                    <div class="top">-->
+<!--                        <div class="task-priority High">-->
+<!--                            <ion-icon name="chevron-up-outline"></ion-icon>-->
+<!--                            <p>მაღალი</p>-->
+<!--                        </div>-->
+<!--                        <div class="task-department">-->
+<!--                            <p>დიზაინი</p>-->
+<!--                        </div>-->
+<!--                        <div class="task-date">-->
+<!--                            <p>22 იანვ, 2022</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="task-desc">
-                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>
-                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>
-                    </div>
-                    <div class="bottom">
-                        <div class="task-college">
-                            <img src="images/cat.jpeg">
-                        </div>
-                        <div class="task-comments">
-                            <ion-icon name="chatbox-outline"></ion-icon>
-                            <p>8</p>
-                        </div>
-                    </div>
-                </div>
+<!--                    <div class="task-desc">-->
+<!--                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>-->
+<!--                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>-->
+<!--                    </div>-->
+<!--                    <div class="bottom">-->
+<!--                        <div class="task-employee">-->
+<!--                            <img src="images/cat.jpeg">-->
+<!--                        </div>-->
+<!--                        <div class="task-comments">-->
+<!--                            <ion-icon name="chatbox-outline"></ion-icon>-->
+<!--                            <p>8</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <div class="category-container category-ready" style="margin-right: 50px;">
                 <div class="category-title">
                     <h6>მზად ტესტირებისთვის</h6>
                 </div>
-                <div class="task">
-                    <div class="top">
-                        <div class="task-priority low">
-                            <ion-icon name="chevron-down-outline"></ion-icon>
-                            <p>დაბალი</p>
-                        </div>
-                        <div class="task-department">
-                            <p>დიზაინი</p>
-                        </div>
-                        <div class="task-date">
-                            <p>22 იანვ, 2022</p>
-                        </div>
-                    </div>
+<!--                <div class="task">-->
+<!--                    <div class="top">-->
+<!--                        <div class="task-priority Low">-->
+<!--                            <ion-icon name="chevron-down-outline"></ion-icon>-->
+<!--                            <p>დაბალი</p>-->
+<!--                        </div>-->
+<!--                        <div class="task-department">-->
+<!--                            <p>დიზაინი</p>-->
+<!--                        </div>-->
+<!--                        <div class="task-date">-->
+<!--                            <p>22 იანვ, 2022</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="task-desc">
-                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>
-                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>
-                    </div>
-                    <div class="bottom">
-                        <div class="task-college">
-                            <img src="images/cat.jpeg">
-                        </div>
-                        <div class="task-comments">
-                            <ion-icon name="chatbox-outline"></ion-icon>
-                            <p>8</p>
-                        </div>
-                    </div>
-                </div>
+<!--                    <div class="task-desc">-->
+<!--                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>-->
+<!--                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>-->
+<!--                    </div>-->
+<!--                    <div class="bottom">-->
+<!--                        <div class="task-employee">-->
+<!--                            <img src="images/cat.jpeg">-->
+<!--                        </div>-->
+<!--                        <div class="task-comments">-->
+<!--                            <ion-icon name="chatbox-outline"></ion-icon>-->
+<!--                            <p>8</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
             <div class="category-container category-done">
                 <div class="category-title">
                     <h6>დასრულებული</h6>
                 </div>
-                <div class="task">
-                    <div class="top">
-                        <div class="task-priority mid">
-                            <ion-icon name="reorder-two-outline"></ion-icon>
-                            <p>საშუალო</p>
-                        </div>
-                        <div class="task-department">
-                            <p>დიზაინი</p>
-                        </div>
-                        <div class="task-date">
-                            <p>22 იანვ, 2022</p>
-                        </div>
-                    </div>
+<!--                <div class="task">-->
+<!--                    <div class="top">-->
+<!--                        <div class="task-priority Medium">-->
+<!--                            <ion-icon name="reorder-two-outline"></ion-icon>-->
+<!--                            <p>საშუალო</p>-->
+<!--                        </div>-->
+<!--                        <div class="task-department">-->
+<!--                            <p>დიზაინი</p>-->
+<!--                        </div>-->
+<!--                        <div class="task-date">-->
+<!--                            <p>22 იანვ, 2022</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="task-desc">
-                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>
-                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>
-                    </div>
-                    <div class="bottom">
-                        <div class="task-college">
-                            <img src="images/cat.jpeg">
-                        </div>
-                        <div class="task-comments">
-                            <ion-icon name="chatbox-outline"></ion-icon>
-                            <p>8</p>
-                        </div>
-                    </div>
-                </div>
+<!--                    <div class="task-desc">-->
+<!--                        <p class="title">redberry-ს საიტის ლენდინგის დიზაიანი</p>-->
+<!--                        <p class="short-desc">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ სექციებს, ნავიგაციას.</p>-->
+<!--                    </div>-->
+<!--                    <div class="bottom">-->
+<!--                        <div class="task-employee">-->
+<!--                            <img src="images/cat.jpeg">-->
+<!--                        </div>-->
+<!--                        <div class="task-comments">-->
+<!--                            <ion-icon name="chatbox-outline"></ion-icon>-->
+<!--                            <p>8</p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </div>

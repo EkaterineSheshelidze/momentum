@@ -12,26 +12,24 @@
 
     <%- include('header') %>
 
-    <div class="container">
+    <div class="my-container">
         <div class="add-task-container">
             <h2 class="form-title">შექმენი ახალი დავალება</h2>
-            <form>
+            <form method="post" action="/add-task">
                 <div class="row mb-3">
                     <div class="col">
                         <label for="title">სათაური*</label>
-                        <input type="text" id="title" class="form-control" minlength="2" required>
+                        <input type="text" id="title" name="name" class="form-control" minlength="2" required>
                         <small>მინიმუმ 2 სიმბოლო</small>
                         <small>მაქსომუმ 255 სიმბოლო</small>
                     </div>
 
                     <div class="col">
                         <label for="departments">დეპარტამენტი*</label>
-                        <select id="departments" class="form-select">
-                            <option selected disabled>დიზაინის დეპარტამენტი</option>
-                            <option value="design">დიზაინის დეპარტამენტი</option>
-                            <option value="logistics">ლოჯისტიკის დეპარტამენტი</option>
-                            <option value="marketing">მარკეტინგის დეპარტამენტი</option>
-                            <option value="it">IT დეპარტამენტი</option>
+                        <select id="departments" name="department" class="form-select">
+                            <% departments.forEach(dep => { %>
+                                <option value="<%= dep.id %>"><%= dep.name %></option>
+                            <% }); %>
                         </select>
                     </div>
                 </div>
@@ -39,7 +37,7 @@
                 <div class="row mb-3">
                     <div class="col">
                         <label for="desc">აღწერა</label>
-                        <input type="text" id="desc" class="form-control" minlength="2" required>
+                        <input type="text" id="desc" name="description" class="form-control" minlength="2" required>
                         <small>მინიმუმ 2 სიმბოლო</small>
                         <small>მაქსომუმ 255 სიმბოლო</small>
                     </div>
@@ -47,28 +45,22 @@
                     <div class="col">
                         <div class="custom-dropdown employee">
                             <p>პასუხისმგებელი თანამშრომელი</p>
-                            <button type="button" class="dropdown-toggle" id="dropdown-btn">
+                            <button type="button" class="dropdown-toggle" id="dropdown-btn-employee">
                                 <img style="display: none" src="images/cat.jpeg" alt="Selected" id="selected-img">
                                 <span style="margin-right: 5px" id="selected-text">აირჩიეთ</span>
                             </button>
-                            <ul class="dropdown-menu">
-                                <li data-value="it">
-                                    <img src="images/cat.jpeg" alt="IT">
-                                    <span>გიო ბაგრატიონი</span>
-                                </li>
-                                <li data-value="logistics">
-                                    <img src="images/cat.jpeg" alt="Logistics">
-                                    <span>ლალი ბაგრატიონი</span>
-                                </li>
-                                <li data-value="marketing">
-                                    <img src="images/cat.jpeg" alt="Marketing">
-                                    <span>ლუკა ბაგრატიონი</span>
-                                </li>
+                            <ul class="dropdown-menu employee">
+                                <% employees.forEach(emp => { %>
+                                    <li data-value="<%= emp.id %>">
+                                        <img src="<%= emp.avatar %>" alt="profile">
+                                        <span><%= emp.name %></span>
+                                    </li>
+                                <% }); %>
                             </ul>
                         </div>
 
                         <!-- Hidden input to store selected value -->
-                        <input type="hidden" name="department" id="selected-value">
+                        <input type="hidden" name="employee" id="selected-employee">
                     </div>
                 </div>
 
@@ -78,42 +70,34 @@
                             <div class="custom-dropdown priority">
                                 <p>პრიორიტეტი</p>
                                 <button type="button" class="dropdown-toggle priority" id="dropdown-btn-priority">
-                                    <ion-icon style="display: none; color: var(--prior-low)" id="selected-icon"></ion-icon>
-                                    <span style="margin-right: 5px" id="selected-priority">აირჩიეთ</span>
+                                    <img src="#" style="display: none; " id="selected-icon" alt="icon">
+                                    <span style="margin-right: 5px" id="selected-priority-text">აირჩიეთ</span>
                                 </button>
                                 <ul class="dropdown-menu priority">
-                                    <li data-value="it">
-                                        <ion-icon name="chevron-down-outline"  style="color: var(--prior-low)"></ion-icon>
-                                        <span>დაბალი</span>
-                                    </li>
-                                    <li data-value="logistics">
-                                        <ion-icon name="reorder-two-outline" style="color: var(--prior-mid)"></ion-icon>
-                                        <span>საშუალო</span>
-                                    </li>
-                                    <li data-value="marketing">
-                                        <ion-icon name="chevron-up-outline" style="color: var(--prior-high)"></ion-icon>
-                                        <span>მაღალი</span>
-                                    </li>
+                                    <% priorities.forEach(prior => { %>
+                                        <li data-value="<%= prior.id %>">
+                                            <img src="<%= prior.icon %>" alt="icon">
+                                            <span><%= prior.name %></span>
+                                        </li>
+                                    <% }); %>
                                 </ul>
                             </div>
 
                             <!-- Hidden input to store selected value -->
-                            <input type="hidden" name="department" id="selected-priority">
+                            <input type="hidden" name="priority" id="selected-priority">
                         </div>
                         <div class="col">
                             <label for="status">სტატუსი*</label>
-                            <select id="status" class="form-select">
-                                <option selected disabled></option>
-                                <option value="it">დასაწყები</option>
-                                <option value="it">პროგრესში</option>
-                                <option value="hr">მზად ტესტირებისთვის</option>
-                                <option value="sales">დასრულებული</option>
+                            <select id="status" name="status" class="form-select">
+                                <% statuses.forEach(stat => { %>
+                                    <option value="<%= stat.id %>"><%= stat.name %></option>
+                                <% }); %>
                             </select>
                         </div>
                     </div>
                     <div class="col deadline">
                         <label for="deadline">დედლაინი*</label>
-                        <input type="date" id="deadline" class="form-control">
+                        <input type="date" id="deadline" name="date" class="form-control">
                     </div>
                 </div>
 

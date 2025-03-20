@@ -10,9 +10,9 @@
     --marketing-color: #FD9A6A;
     --logistics-color: #89B6FF;
     --infoTech-color: #FFD86D;
-    --prior-low: #08A508;
-    --prior-mid: #FFBE0B;
-    --prior-high: #FA4D4D;
+    --prior-Low: #08A508;
+    --prior-Medium: #FFBE0B;
+    --prior-High: #FA4D4D;
 }
 
 /* firago-latin-400-normal */
@@ -49,7 +49,10 @@
 }
 
 .navbar{
+    width: 100%;
     padding: 30px 120px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .my-btn{
@@ -94,8 +97,8 @@
     margin-right: 4px;
 }
 
-.container{
-    margin: 30px 120px;
+.my-container{
+    margin: 30px 120px !important;
 }
 
 .page-title{
@@ -184,7 +187,7 @@
 /*    background-color: white; !* Always white background *!*/
 /*    position: relative;*/
 /*    cursor: pointer;*/
-/*    vertical-align: middle; !* Aligns with label *!*/
+/*    vertical-align: Mediumdle; !* Aligns with label *!*/
 /*}*/
 
 /*!* Checkmark style *!*/
@@ -214,9 +217,16 @@
 
 
 
+.selected{
+    display: flex;
+    height: 90px;
+    position: relative;
+}
+
 .selected-container{
     display: flex;
-    margin: 30px 0;
+    position: absolute;
+    top: 28px;
 }
 
 .selected-item{
@@ -302,34 +312,42 @@
     transition: outline 0.3s ease, outline-color 0.3s ease;
 }
 
+.task .task-link{
+    text-decoration: none;
+    color: black;
+}
+
 .task .top{
     display: flex;
     align-items: center;
     position: relative;
 }
 
-.task .task-priority {
+.task-priority {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
+    gap: 1px;
     border-radius: 4px;
     margin-right: 9px;
+    height: 26px;
+    width: 86px;
+    gap: 2px;
 }
 
-.task .task-priority.low{
-    color: var(--prior-low);
-    border: 1px solid var(--prior-low);
+.task-priority.Low{
+    color: var(--prior-Low);
+    border: 1px solid var(--prior-Low);
 }
 
-.task .task-priority.mid{
-    color: var(--prior-mid);
-    border: 1px solid var(--prior-mid);
+.task-priority.Medium{
+    color: var(--prior-Medium);
+    border: 1px solid var(--prior-Medium);
 }
 
-.task .task-priority.high{
-    color: var(--prior-high);
-    border: 1px solid var(--prior-high);
+.task-priority.High{
+    color: var(--prior-High);
+    border: 1px solid var(--prior-High);
 }
 
 
@@ -365,27 +383,25 @@
     outline: 2px solid var(--done-color);
 }
 
-.task .task-priority p{
-    margin: auto;
+.task-priority p{
+    margin: auto 0;
     font-weight: bold;
     font-size: 12px;
 }
 
-.task .task-priority ion-icon{
-    margin-right: 4px;
-}
-
-.task .task-department{
+.task-department{
+    display: flex;
     align-items: center;
     justify-content: center;
     background-color: var(--design-color);
     color: #fff;
     border: 1px solid var(--design-color);
     border-radius: 15px;
-    padding: 5px 9px;
+    height: 24px;
+    width: 88px;
 }
 
-.task .task-department p{
+.task-department p{
     margin: auto;
     font-size: 12px;
 }
@@ -679,7 +695,7 @@ body{
     border-radius: 50%;
 }
 
-.add-task-container form .custom-dropdown.priority .dropdown-toggle ion-icon {
+.add-task-container form .custom-dropdown.priority .dropdown-toggle img {
     width: 25px;
     height: 25px;
     margin-right: 7px;
@@ -717,7 +733,7 @@ body{
     border-radius: 50%;
 }
 
-.add-task-container form .custom-dropdown.priority .dropdown-menu li ion-icon{
+.add-task-container form .custom-dropdown.priority .dropdown-menu li img{
     width: 25px;
     height: 25px;
     margin-right: 7px;
@@ -727,3 +743,176 @@ body{
     background: #f0f0f0;
 }
 
+.task-info .content{
+    width: 650px;
+}
+
+.task-info .content h6{
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.task-info .top-categories{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.task-info .task-details{
+    margin-top: 40px;
+}
+
+.task-info .task-details h6{
+    font-size: 24px;
+}
+
+.task-info .task-details .status,
+.task-info .task-details .employee,
+.task-info .task-details .deadline{
+    display: flex;
+    align-items: center;
+}
+
+.task-info .task-details .status p,
+.task-info .task-details .employee p,
+.task-info .task-details .deadline p {
+    margin: auto 6px;
+}
+
+.task-info .task-details .status ion-icon,
+.task-info .task-details .employee ion-icon,
+.task-info .task-details .deadline ion-icon {
+    height: 24px;
+    width: 24px;
+}
+
+.task-info img{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 12px;
+}
+
+.task-info .col{
+    margin-bottom: 20px;
+}
+
+.task-info .person{
+    display: flex;
+    align-items: center;
+}
+
+.task-info .personal-info{
+    position: relative;
+    width: 150px;
+}
+
+.task-info .personal-info .department{
+    font-size: 11px;
+    color: #474747;
+    position: absolute;
+    top: -15px;
+
+}
+
+.task-info .personal-info .name{
+    font-size: 14px;
+    margin: auto 0;
+}
+
+.task-info .dropdown{
+    border: 1px solid #CED4DA;
+    border-radius: 5px;
+    padding: 7px;
+}
+
+.left{
+    background-color: #f8f5ff;
+    border-radius: 10px;
+    padding: 40px
+}
+
+
+.custom-form {
+    background-color: white; /* Light purple background */
+    padding: 20px;
+    border-radius: 12px;
+    width: 651px;
+    height: 135px;
+    position: relative;
+}
+
+.input{
+    background: white;
+    border-radius: 8px;
+    padding: 10px;
+    width: 620px;
+    height: 50px;
+}
+
+.input button{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.input input {
+    border: none;
+    flex: 1;
+    outline: none;
+    font-size: 14px;
+}
+
+.comments-container{
+    margin-top: 60px;
+}
+
+.comments-container h5{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.comments-container span{
+    color: white;
+    background-color: var(--btn-main);
+    border-radius: 30px;
+    font-size: 14px;
+    margin-left: 7px;
+    height: 23px;
+    width: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.comments-container .comment,
+.comments-container .reply{
+    display: flex;
+}
+
+.comments-container .reply{
+    margin: 17px 0 17px 49px;
+}
+
+.comments-container img{
+    height: 38px;
+    width: 38px;
+}
+
+.comments-container .content h6{
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.comments-container .content p{
+    font-size: 16px;
+}
+
+.comments-container .content button{
+    border: none;
+    background: none;
+    color: var(--btn-main);
+}
