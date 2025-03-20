@@ -85,23 +85,6 @@ document.addEventListener("click", (e) => {
     }
 });
 
-const translations = {
-    "Low": "დაბალი",
-    "Medium": "საშუალო",
-    "High": "მაღალი"
-};
-
-
-// Wait for the DOM to load
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelectorAll(".form-check-label").forEach(label => {
-        let englishText = label.dataset.name; // Get original English name
-        if (translations[englishText]) {
-            label.innerText = translations[englishText]; // Replace with Georgian
-        }
-    });
-});
-
 document.getElementById('avatar').addEventListener('change', function (event) {
     const file = event.target.files[0]; // Get the selected file
 
