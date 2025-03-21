@@ -16,16 +16,17 @@
         <h3 class="page-title">დავალებების გვერდი</h3>
 
         <div class="dropdown-container">
+            <!-- Department Filter -->
             <div class="dropdown department">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     დეპარტამენტი
                 </button>
                 <div class="dropdown-menu p-3">
-                    <form id="filterForm">
+                    <form id="departmentFilter">
                         <% departments.forEach(dep => { %>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="<%= dep.id %>">
-                                <label class="form-check-label" for="<%= dep.name %>">
+                                <input class="form-check-input department-checkbox" type="checkbox" value="<%= dep.id %>" id="dep_<%= dep.id %>">
+                                <label class="form-check-label" for="dep_<%= dep.id %>">
                                     <%= dep.name %>
                                 </label>
                             </div>
@@ -36,16 +37,18 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Priority Filter -->
             <div class="dropdown priority">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     პრიორიტეტი
                 </button>
                 <div class="dropdown-menu p-3">
-                    <form id="filterForm">
+                    <form id="priorityFilter">
                         <% priorities.forEach(prior => { %>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="<%= prior.id %>" id="<%= prior.name %>">
-                                <label class="form-check-label" for="<%= prior.name %>">
+                                <input class="form-check-input priority-checkbox" type="checkbox" value="<%= prior.id %>" id="prior_<%= prior.id %>">
+                                <label class="form-check-label" for="prior_<%= prior.id %>">
                                     <%= prior.name %>
                                 </label>
                             </div>
@@ -56,20 +59,22 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Employee Filter -->
             <div class="dropdown employee">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     თანამშრომელი
                 </button>
                 <div class="dropdown-menu p-3">
-                    <form id="filterForm">
+                    <form id="employeeFilter">
                         <% employees.forEach(emp => { %>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="<%= emp.id %>>">
-                            <label class="form-check-label">
-                                <img src="<%= emp.avatar %>" alt="prof">
-                                <%= emp.name + " " + emp.surname %>
-                            </label>
-                        </div>
+                            <div class="form-check">
+                                <input class="form-check-input employee-checkbox" type="checkbox" value="<%= emp.id %>" id="emp_<%= emp.id %>">
+                                <label class="form-check-label" for="emp_<%= emp.id %>">
+                                    <img src="<%= emp.avatar %>" alt="Avatar" class="avatar">
+                                    <%= emp.name + ' ' + emp.surname %>
+                                </label>
+                            </div>
                         <% }); %>
                         <div class="text-end">
                             <button type="submit" class="my-btn filled-btn">არჩევა</button>
@@ -80,14 +85,7 @@
         </div>
 
         <div class="selected">
-            <div class="selected-container">
-                <div class="selected-item">
-                    <p>მაღალი</p>
-                    <button type="button" class="remove-item"><ion-icon name="close-outline"></ion-icon></button>
-                </div>
-                <div class="selected-item" style="border:none">
-                    <button type="button" class="empty-btn">გასუფთავება</button>
-                </div>
+            <div class="selected-container" id="selectedContainer">
             </div>
         </div>
 
@@ -98,54 +96,17 @@
                 </div>
                 <% tasks.forEach(task => {
                     if(task.status.id == 1){ %>
-                    <div class="task">
-                        <a class="task-link" href="/task/<%= task.id %>">
-                        <div class="top">
-                            <div class="task-priority <%= "priority" + task.priority.id %>">
-                                <img src="<%= task.priority.icon %>"></img>
-                                <p><%= task.priority.name %></p>
-                            </div>
-                            <div class="task-department">
-                                <p><%= task.department.name %></p>
-                            </div>
-                            <div class="task-date">
-                                <p><%= moment(task.due_date).locale('ka').format('DD MMM, YYYY') %></p>
-                            </div>
-                        </div>
-
-                        <div class="task-desc">
-                            <p class="title"><%= task.name %></p>
-                            <p class="short-desc"><%= task.description %></p>
-                        </div>
-
-                        <div class="bottom">
-                            <div class="task-employee">
-                                <img src="<%= task.employee.avatar %>">
-                            </div>
-                            <div class="task-comments">
-                                <ion-icon name="chatbox-outline"></ion-icon>
-                                <p>8</p>
-                            </div>
-                        </div>
-                    </a>
-                    </div>
-                <% }
-                });%>
-            </div>
-            <div class="category-container category-progress" style="margin-right: 50px;">
-                <div class="category-title">
-                    <h6>პროგრესში</h6>
-                </div>
-                <% tasks.forEach(task => {
-                if(task.status.id == 2){ %>
-                    <div class="task">
+                    <div class="task"
+                         data-department-id="<%= task.department.id %>"
+                         data-priority-id="<%= task.priority.id %>"
+                         data-employee-id="<%= task.employee.id %>">
                         <a class="task-link" href="/task/<%= task.id %>">
                             <div class="top">
-                                <div class="task-priority <%= "priority" + task.priority.id %>">
-                                    <img src="<%= task.priority.icon %>"></img>
+                                <div class="task-priority priority<%= task.priority.id %>" data-priority-id="<%= task.priority.id %>">
+                                    <img src="<%= task.priority.icon %>" alt="Priority Icon">
                                     <p><%= task.priority.name %></p>
                                 </div>
-                                <div class="task-department">
+                                <div class="task-department" data-department-id="<%= task.department.id %>">
                                     <p><%= task.department.name %></p>
                                 </div>
                                 <div class="task-date">
@@ -159,12 +120,55 @@
                             </div>
 
                             <div class="bottom">
-                                <div class="task-employee">
-                                    <img src="<%= task.employee.avatar %>">
+                                <div class="task-employee" data-employee-id="<%= task.employee.id %>">
+                                    <img src="<%= task.employee.avatar %>" alt="Employee Avatar">
                                 </div>
                                 <div class="task-comments">
                                     <ion-icon name="chatbox-outline"></ion-icon>
-                                    <p>8</p>
+                                    <p><%= task.total_comments %></p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                <% }
+                });%>
+            </div>
+            <div class="category-container category-progress" style="margin-right: 50px;">
+                <div class="category-title">
+                    <h6>პროგრესში</h6>
+                </div>
+                <% tasks.forEach(task => {
+                if(task.status.id == 2){ %>
+                    <div class="task"
+                         data-department-id="<%= task.department.id %>"
+                         data-priority-id="<%= task.priority.id %>"
+                         data-employee-id="<%= task.employee.id %>">
+                        <a class="task-link" href="/task/<%= task.id %>">
+                            <div class="top">
+                                <div class="task-priority priority<%= task.priority.id %>" data-priority-id="<%= task.priority.id %>">
+                                    <img src="<%= task.priority.icon %>" alt="Priority Icon">
+                                    <p><%= task.priority.name %></p>
+                                </div>
+                                <div class="task-department" data-department-id="<%= task.department.id %>">
+                                    <p><%= task.department.name %></p>
+                                </div>
+                                <div class="task-date">
+                                    <p><%= moment(task.due_date).locale('ka').format('DD MMM, YYYY') %></p>
+                                </div>
+                            </div>
+
+                            <div class="task-desc">
+                                <p class="title"><%= task.name %></p>
+                                <p class="short-desc"><%= task.description %></p>
+                            </div>
+
+                            <div class="bottom">
+                                <div class="task-employee" data-employee-id="<%= task.employee.id %>">
+                                    <img src="<%= task.employee.avatar %>" alt="Employee Avatar">
+                                </div>
+                                <div class="task-comments">
+                                    <ion-icon name="chatbox-outline"></ion-icon>
+                                    <p><%= task.total_comments %></p>
                                 </div>
                             </div>
                         </a>
@@ -178,14 +182,17 @@
                 </div>
                 <% tasks.forEach(task => {
                 if(task.status.id == 3){ %>
-                    <div class="task">
+                    <div class="task"
+                         data-department-id="<%= task.department.id %>"
+                         data-priority-id="<%= task.priority.id %>"
+                         data-employee-id="<%= task.employee.id %>">
                         <a class="task-link" href="/task/<%= task.id %>">
                             <div class="top">
-                                <div class="task-priority <%= "priority" + task.priority.id %>">
-                                    <img src="<%= task.priority.icon %>"></img>
+                                <div class="task-priority priority<%= task.priority.id %>" data-priority-id="<%= task.priority.id %>">
+                                    <img src="<%= task.priority.icon %>" alt="Priority Icon">
                                     <p><%= task.priority.name %></p>
                                 </div>
-                                <div class="task-department">
+                                <div class="task-department" data-department-id="<%= task.department.id %>">
                                     <p><%= task.department.name %></p>
                                 </div>
                                 <div class="task-date">
@@ -199,12 +206,12 @@
                             </div>
 
                             <div class="bottom">
-                                <div class="task-employee">
-                                    <img src="<%= task.employee.avatar %>">
+                                <div class="task-employee" data-employee-id="<%= task.employee.id %>">
+                                    <img src="<%= task.employee.avatar %>" alt="Employee Avatar">
                                 </div>
                                 <div class="task-comments">
                                     <ion-icon name="chatbox-outline"></ion-icon>
-                                    <p>8</p>
+                                    <p><%= task.total_comments %></p>
                                 </div>
                             </div>
                         </a>
@@ -218,14 +225,17 @@
                 </div>
                 <% tasks.forEach(task => {
                 if(task.status.id == 4){ %>
-                    <div class="task">
+                    <div class="task"
+                         data-department-id="<%= task.department.id %>"
+                         data-priority-id="<%= task.priority.id %>"
+                         data-employee-id="<%= task.employee.id %>">
                         <a class="task-link" href="/task/<%= task.id %>">
                             <div class="top">
-                                <div class="task-priority <%= "priority" + task.priority.id %>">
-                                    <img src="<%= task.priority.icon %>"></img>
+                                <div class="task-priority priority<%= task.priority.id %>" data-priority-id="<%= task.priority.id %>">
+                                    <img src="<%= task.priority.icon %>" alt="Priority Icon">
                                     <p><%= task.priority.name %></p>
                                 </div>
-                                <div class="task-department">
+                                <div class="task-department" data-department-id="<%= task.department.id %>">
                                     <p><%= task.department.name %></p>
                                 </div>
                                 <div class="task-date">
@@ -239,12 +249,12 @@
                             </div>
 
                             <div class="bottom">
-                                <div class="task-employee">
-                                    <img src="<%= task.employee.avatar %>">
+                                <div class="task-employee" data-employee-id="<%= task.employee.id %>">
+                                    <img src="<%= task.employee.avatar %>" alt="Employee Avatar">
                                 </div>
                                 <div class="task-comments">
                                     <ion-icon name="chatbox-outline"></ion-icon>
-                                    <p>8</p>
+                                    <p><%= task.total_comments %></p>
                                 </div>
                             </div>
                         </a>

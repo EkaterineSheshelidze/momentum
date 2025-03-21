@@ -91,7 +91,7 @@
                 </form>
 
                 <div class="comments-container">
-                    <h5>კომენტარები <span>3</span></h5>
+                    <h5>კომენტარები <span><%= task.total_comments %></span></h5>
                     <div class="comment-section">
                         <% comments.forEach(comment => {
                             if(comment.task_id == task.id) { %>
