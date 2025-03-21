@@ -221,6 +221,47 @@ app.post("/add-task", async (req, res) => {
     }
 });
 
+app.post("/add-comment", async (req, res) => {
+    const { task_id, text } = req.body;
+
+    const formData = new FormData();
+    formData.append('text', text);
+    formData.append('task_id', task_id);
+
+    try {
+        await axios.post('https://momentum.redberryinternship.ge/api/tasks/' + task_id + '/comments', formData, {
+            headers: {
+                Authorization: `Bearer ${process.env.API_TOKEN}`,
+                ...formData.getHeaders()
+            }
+        });
+        res.redirect('/task/' + task_id);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
+app.post("/add-reply", async (req, res) => {
+    const { parent_id, task_id, text } = req.body;
+
+    const formData = new FormData();
+    formData.append('text', text);
+    formData.append('task_id', task_id);
+    formData.append('parent_id', parent_id);
+
+    try {
+        await axios.post('https://momentum.redberryinternship.ge/api/tasks/' + task_id + '/comments', formData, {
+            headers: {
+                Authorization: `Bearer ${process.env.API_TOKEN}`,
+                ...formData.getHeaders()
+            }
+        });
+        res.redirect('/task/' + task_id);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

@@ -836,7 +836,7 @@ body{
     color: #474747;
     position: absolute;
     top: -15px;
-    width: 230px;
+    width: 350px;
 }
 
 .task-info .personal-info .name{
@@ -866,6 +866,11 @@ body{
     position: relative;
 }
 
+.reply-form {
+    display: none;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
 .input{
     background: white;
     border-radius: 8px;
@@ -880,7 +885,7 @@ body{
     right: 20px;
 }
 
-.input input {
+.input textarea {
     border: none;
     flex: 1;
     outline: none;
@@ -915,10 +920,11 @@ body{
 .comments-container .comment,
 .comments-container .reply{
     display: flex;
+    margin-bottom: 17px;
 }
 
 .comments-container .reply{
-    margin: 17px 0 17px 49px;
+    margin: 17px 0 0 49px;
 }
 
 .comments-container .comment-avatar{
@@ -937,8 +943,9 @@ body{
     font-size: 16px;
 }
 
-.comments-container .content button{
+.comments-container .content .reply-btn{
     border: none;
     background: none;
     color: var(--btn-main);
+    margin-bottom: 13px;
 }

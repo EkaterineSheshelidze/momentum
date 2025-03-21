@@ -84,7 +84,8 @@
             <div class="col right">
                 <form action="/add-comment" method="POST" class="custom-form">
                     <div class="input">
-                        <input type="text" id="comment" name="comment" placeholder="დაწერე კომენტარი" required>
+                        <input type="hidden" name="task_id" value="<%= task.id %>">
+                        <textarea id="comment" name="text" placeholder="დაწერე კომენტარი" required></textarea>
                         <button type="submit" class="my-btn filled-btn">დააკომენტარე</button>
                     </div>
                 </form>
@@ -92,21 +93,35 @@
                 <div class="comments-container">
                     <h5>კომენტარები <span>3</span></h5>
                     <div class="comment-section">
-                        <div class="comment">
-                            <img class="comment-avatar" src="/images/cat.jpeg" alt="comment-profile">
-                            <div class="content">
-                                <h6>ემილია მორგანი</h6>
-                                <p>დიზაინი სუფთად ჩანს, მაგრამ კოდირებისას მნიშვნელოვანი იქნება, რომ ელემენტებს ჰქონდეს შესაბამისი რეზოლუცია.</p>
-                                <button id="#reply" type="submit"><ion-icon name="arrow-undo-outline"></ion-icon> უპასუხე</button>
-                            </div>
-                        </div>
-                        <div class="reply">
-                            <img class="comment-avatar" src="/images/cat.jpeg" alt="comment-profile">
-                            <div class="content">
-                                <h6>ემილია მორგანი</h6>
-                                <p>დიზაინი სუფთად ჩანს, მაგრამ კოდირებისას მნიშვნელოვანი იქნება, რომ ელემენტებს ჰქონდეს შესაბამისი რეზოლუცია.</p>
-                            </div>
-                        </div>
+                        <% comments.forEach(comment => {
+                            if(comment.task_id == task.id) { %>
+                                <div class="comment">
+                                    <img class="comment-avatar" src="<%= comment.author_avatar %>" alt="comment-profile">
+                                    <div class="content">
+                                        <h6><%= comment.author_nickname %></h6>
+                                        <p><%= comment.text %></p>
+                                        <button class="reply-btn" type="button"><ion-icon name="arrow-undo-outline"></ion-icon> უპასუხე</button>
+                                        <form action="/add-reply" method="POST" class="custom-form reply-form">
+                                            <div class="input reply-input">
+                                                <input type="hidden" name="task_id" value="<%= task.id %>">
+                                                <input type="hidden" name="parent_id" value="<%= comment.id %>">
+                                                <textarea id="reply" name="text" placeholder="დაწერე კომენტარი" required></textarea>
+                                                <button type="submit" class="my-btn filled-btn">დააკომენტარე</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            <% comment.sub_comments.forEach(reply => {%>
+                                <div class="reply">
+                                    <img class="comment-avatar" src="<%= reply.author_avatar %>>" alt="comment-profile">
+                                    <div class="content">
+                                        <h6><%= reply.author_nickname %></h6>
+                                        <p><%= reply.text %></p>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        <% }
+                                }); %>
                     </div>
                 </div>
             </div>
