@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const updateSelectedItems = () => {
-        selectedContainer.innerHTML = ''; // Clear previous selections
+        selectedContainer.innerHTML = '';
 
         const addSelectedItem = (type, id, name) => {
             const selectedItem = document.createElement('div');

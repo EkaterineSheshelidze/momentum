@@ -17,7 +17,7 @@ app.locals.moment = moment;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist'))); // Fixed
+app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true }));
@@ -26,11 +26,11 @@ app.use(express.json());
 // Configure Multer storage
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'public', 'images')); // Fixed
+        cb(null, path.join(__dirname, 'public', 'images'));
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalname)); // Example: 1234567890.png
+        cb(null, uniqueSuffix + path.extname(file.originalname));
     }
 });
 

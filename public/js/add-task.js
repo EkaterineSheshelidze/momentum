@@ -29,7 +29,6 @@ dropdownMenu.querySelectorAll("li").forEach(item => {
     });
 });
 
-
 // Priority dropdown
 const priorityBtn = document.getElementById("dropdown-btn-priority");
 const priorityMenu = document.querySelector(".dropdown-menu.priority");

@@ -13,21 +13,21 @@ document.getElementById("add-employee-btn").addEventListener("click", () => {
 
 // Employee avatar preview
 document.getElementById('avatar').addEventListener('change', function (event) {
-    const file = event.target.files[0]; // Get the selected file
+    const file = event.target.files[0];
 
     if (file) {
-        if (!file.type.startsWith('image/')) { // Check if the file is an image
+        if (!file.type.startsWith('image/')) {
             alert("Please upload a valid image (JPG, PNG, etc.).");
             return;
         }
 
-        const reader = new FileReader(); // Create a FileReader to read the file
+        const reader = new FileReader();
 
         reader.onload = function (e) {
-            document.getElementById('avatarPreview').src = e.target.result; // Update the preview with the selected image
+            document.getElementById('avatarPreview').src = e.target.result;
         };
 
-        reader.readAsDataURL(file); // Read the file as a data URL
+        reader.readAsDataURL(file);
     }
 });
 
@@ -60,23 +60,23 @@ function validateInput(input) {
     // Select the small elements that are siblings of the input
     const smallTags = input.parentElement.querySelectorAll("small");
 
-    if (!smallTags || smallTags.length < 2) return; // Ensure both small elements exist
+    if (!smallTags || smallTags.length < 2) return;
 
     const valueLength = input.value.length;
 
     // Minimum length validation
     if (valueLength < minLimit) {
-        smallTags[0].style.color = "red"; // First small tag turns red
-        smallTags[1].style.color = ""; // Reset second small tag
+        smallTags[0].style.color = "red";
+        smallTags[1].style.color = "";
     } else {
-        smallTags[0].style.color = "green"; // First small tag turns green
+        smallTags[0].style.color = "green";
     }
 
     // Maximum length validation
     if (valueLength > maxLimit) {
-        smallTags[1].style.color = "red"; // Second small tag turns red
+        smallTags[1].style.color = "red";
     } else if (valueLength >= minLimit) {
-        smallTags[1].style.color = "green"; // Second small tag turns green
+        smallTags[1].style.color = "green";
     }
 }
 
