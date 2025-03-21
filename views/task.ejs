@@ -37,16 +37,16 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <div class="dropdown">
-                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <%= task.status.name %>
-                                        </button>
-                                        <ul class="dropdown-menu" style="width: 300px">
+                                    <form action="/change-status" class="status-form">
+                                        <input type="hidden" name="task_id" value="<%= task.id %>">
+                                        <select class="form-select status-select" name="status">
                                             <% statuses.forEach(stat => { %>
-                                                <li><a class="dropdown-item" href="#"><%= stat.name %></a></li>
+                                                <option name="status_id" value="<%= stat.id %>" <%= task.status.id === stat.id ? 'selected' : '' %>>
+                                                    <%= stat.name %>
+                                                </option>
                                             <% }); %>
-                                        </ul>
-                                    </div>
+                                        </select>
+                                    </form>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -129,6 +129,7 @@
     </div>
 
     <script src="/js/main.js"></script>
+    <script src="/js/comment.js"></script>
     <script src="/bootstrap/js/bootstrap.bundle.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
