@@ -327,7 +327,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1px;
     border-radius: 4px;
     margin-right: 9px;
     height: 26px;
@@ -434,7 +433,7 @@
     text-align: left;
     white-space: normal;   /* Allows wrapping */
     overflow-wrap: break-word;
-    overflow: hidden;     /* Prevent overflow */
+    overflow: hidden;
 }
 
 .task .task-desc .title{
@@ -760,6 +759,15 @@ body{
 
 .task-info .content{
     width: 650px;
+    white-space: normal;   /* Allows wrapping */
+    overflow-wrap: break-word;
+}
+
+.task-info .content .desc{
+    white-space: normal;      /* Allows text wrapping */
+    word-wrap: break-word;   /* Breaks long words */
+    overflow-wrap: break-word; /* Breaks words at appropriate points */
+    max-height: 100%;       /* Ensures content stays within container */
 }
 
 .task-info .content h6{
@@ -802,7 +810,7 @@ body{
     width: 24px;
 }
 
-.task-info img{
+.task-info .avatar{
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -828,7 +836,7 @@ body{
     color: #474747;
     position: absolute;
     top: -15px;
-
+    width: 230px;
 }
 
 .task-info .personal-info .name{
@@ -842,7 +850,7 @@ body{
     padding: 7px;
 }
 
-.left{
+.right{
     background-color: #f8f5ff;
     border-radius: 10px;
     padding: 40px
@@ -877,6 +885,7 @@ body{
     flex: 1;
     outline: none;
     font-size: 14px;
+    width: 100%;
 }
 
 .comments-container{
@@ -912,9 +921,11 @@ body{
     margin: 17px 0 17px 49px;
 }
 
-.comments-container img{
+.comments-container .comment-avatar{
     height: 38px;
     width: 38px;
+    border-radius: 50%;
+    margin-right: 12px;
 }
 
 .comments-container .content h6{

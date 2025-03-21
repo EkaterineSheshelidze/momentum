@@ -14,19 +14,19 @@
 
     <div class="my-container task-info">
         <div class="row mb-3">
-            <div class="col right">
+            <div class="col left">
                 <div class="content">
                     <div class="top-categories">
-                        <div class="task-priority Medium">
-                            <ion-icon name="reorder-two-outline"></ion-icon>
-                            <p>საშუალო</p>
+                        <div class="task-priority <%= "priority" + task.priority.id %>">
+                            <img src="<%= task.priority.icon %>" alt="icon">
+                            <p><%= task.priority.name %></p>
                         </div>
                         <div class="task-department">
-                            <p>დიზაინი</p>
+                            <p><%= task.department.name %></p>
                         </div>
                     </div>
-                    <h6 class="page-title">Redberry-ს საიტის ლენდინგის დიზაინი</h6>
-                    <p class="desc">მიზანია რომ შეიქმნას თანამედროვე, სუფთა და ფუნქციონალური დიზაინი, რომელიც უზრუნველყოფს მარტივ ნავიგაციას და მკაფიო ინფორმაციის გადაცემას. დიზაინი უნდა იყოს ადაპტირებადი (responsive), გამორჩეული ვიზუალით, მინიმალისტური სტილით და ნათელი ტიპოგრაფიით.</p>
+                    <h6 class="page-title"><%= task.name %></h6>
+                    <p class="desc"><%= task.description %></p>
                     <div class="task-details">
                             <h6>დავალების დეტალები</h6>
                             <div class="row mb-3" style="display: flex; align-items: center">
@@ -39,13 +39,12 @@
                                 <div class="col">
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            მზად ტესტირებისთვის
+                                            <%= task.status.name %>
                                         </button>
                                         <ul class="dropdown-menu" style="width: 300px">
-                                            <li><a class="dropdown-item" href="#">დასაწყები</a></li>
-                                            <li><a class="dropdown-item" href="#">პროგრესში</a></li>
-                                            <li><a class="dropdown-item" href="#">მზად ტესტირებისთვის</a></li>
-                                            <li><a class="dropdown-item" href="#">დასრულებული</a></li>
+                                            <% statuses.forEach(stat => { %>
+                                                <li><a class="dropdown-item" href="#"><%= stat.name %></a></li>
+                                            <% }); %>
                                         </ul>
                                     </div>
                                 </div>
@@ -59,10 +58,10 @@
                                 </div>
                                 <div class="col">
                                     <div class="person">
-                                        <img src="images/cat.jpeg" alt="profile">
+                                        <img class="avatar" src="<%= task.employee.avatar %>" alt="profile">
                                         <div class="personal-info">
-                                            <p class="department">დიზაინის დეპარტამენტი</p>
-                                            <p class="name">ელაია ბაგრატიონი</p>
+                                            <p class="department"><%= task.department.name %></p>
+                                            <p class="name"><%= task.employee.name + " " + task.employee.surname %></p>
                                         </div>
                                     </div>
                                 </div>
@@ -75,35 +74,34 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <p class="deadline">ორშ - 02/2/2025</p>
+                                    <p class="deadline"><%= moment(task.due_date).locale('ka').format('ddd - DD/M/YYYY') %></p>
                                 </div>
                             </div>
                         </div>
                 </div>
             </div>
 
-            <div class="col left">
-                <div class="custom-form">
+            <div class="col right">
+                <form action="/add-comment" method="POST" class="custom-form">
                     <div class="input">
-                        <input type="text" id="comment" placeholder="დაწერე კომენტარი">
+                        <input type="text" id="comment" name="comment" placeholder="დაწერე კომენტარი" required>
                         <button type="submit" class="my-btn filled-btn">დააკომენტარე</button>
                     </div>
-                </div>
+                </form>
 
                 <div class="comments-container">
                     <h5>კომენტარები <span>3</span></h5>
                     <div class="comment-section">
                         <div class="comment">
-                            <img src="images/cat.jpeg" alt="comment-profile">
+                            <img class="comment-avatar" src="/images/cat.jpeg" alt="comment-profile">
                             <div class="content">
                                 <h6>ემილია მორგანი</h6>
                                 <p>დიზაინი სუფთად ჩანს, მაგრამ კოდირებისას მნიშვნელოვანი იქნება, რომ ელემენტებს ჰქონდეს შესაბამისი რეზოლუცია.</p>
                                 <button id="#reply" type="submit"><ion-icon name="arrow-undo-outline"></ion-icon> უპასუხე</button>
-
                             </div>
                         </div>
                         <div class="reply">
-                            <img src="images/cat.jpeg" alt="comment-profile">
+                            <img class="comment-avatar" src="/images/cat.jpeg" alt="comment-profile">
                             <div class="content">
                                 <h6>ემილია მორგანი</h6>
                                 <p>დიზაინი სუფთად ჩანს, მაგრამ კოდირებისას მნიშვნელოვანი იქნება, რომ ელემენტებს ჰქონდეს შესაბამისი რეზოლუცია.</p>
@@ -116,7 +114,7 @@
     </div>
 
     <script src="/js/main.js"></script>
-    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

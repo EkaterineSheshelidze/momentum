@@ -99,7 +99,7 @@
                 <% tasks.forEach(task => {
                     if(task.status.id == 1){ %>
                     <div class="task">
-                        <a class="task-link" href="/task">
+                        <a class="task-link" href="/task/<%= task.id %>">
                         <div class="top">
                             <div class="task-priority <%= "priority" + task.priority.id %>">
                                 <img src="<%= task.priority.icon %>"></img>
@@ -139,7 +139,7 @@
                 <% tasks.forEach(task => {
                 if(task.status.id == 2){ %>
                     <div class="task">
-                        <a class="task-link" href="/task">
+                        <a class="task-link" href="/task/<%= task.id %>">
                             <div class="top">
                                 <div class="task-priority <%= "priority" + task.priority.id %>">
                                     <img src="<%= task.priority.icon %>"></img>
@@ -179,7 +179,7 @@
                 <% tasks.forEach(task => {
                 if(task.status.id == 3){ %>
                     <div class="task">
-                        <a class="task-link" href="/task">
+                        <a class="task-link" href="/task/<%= task.id %>">
                             <div class="top">
                                 <div class="task-priority <%= "priority" + task.priority.id %>">
                                     <img src="<%= task.priority.icon %>"></img>
@@ -219,7 +219,7 @@
                 <% tasks.forEach(task => {
                 if(task.status.id == 4){ %>
                     <div class="task">
-                        <a class="task-link" href="/task">
+                        <a class="task-link" href="/task/<%= task.id %>">
                             <div class="top">
                                 <div class="task-priority <%= "priority" + task.priority.id %>">
                                     <img src="<%= task.priority.icon %>"></img>
@@ -256,7 +256,7 @@
     </div>
 
     <script src="/js/main.js"></script>
-    <script src="bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="/bootstrap/js/bootstrap.bundle.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
