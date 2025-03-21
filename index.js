@@ -5,6 +5,7 @@ const fs = require('fs');
 const FormData = require('form-data');
 const path = require('path');
 const moment = require('moment');
+
 require('moment/locale/ka');
 
 require('dotenv').config();
@@ -13,16 +14,14 @@ const app = express();
 
 app.locals.moment = moment;
 
-// Set EJS as the templating engine
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); // Fixed
+app.set('views', path.join(__dirname, 'views'));
 
-// Serve static files
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist'))); // Fixed
-app.use(express.static(path.join(__dirname, 'public'))); // Fixed
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json()); // For JSON data
+app.use(express.json());
 
 // Configure Multer storage
 const storage = multer.diskStorage({
@@ -50,7 +49,7 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-// Route to fetch data and render it in tasks.ejs
+// Route to tasks
 app.get('/', async (req, res) => {
     try {
         const statResp = await axios.get('https://momentum.redberryinternship.ge/api/statuses', {
@@ -86,6 +85,7 @@ app.get('/', async (req, res) => {
     }
 });
 
+// Route to each task
 app.get('/task/:id', async (req, res) => {
     try {
         const taskId = req.params.id;
@@ -128,16 +128,11 @@ app.get('/task/:id', async (req, res) => {
             comments: commentResp.data
         });
     } catch (error) {
-        if (error.response) {
-            res.status(error.response.status).send("API Error: " + error.response.data.message);
-        } else if (error.request) {
-            res.status(500).send("No response from API.");
-        } else {
-            res.status(500).send("Request setup error: " + error.message);
-        }
+        res.status(500).send(error.message);
     }
 });
 
+// Route to add task page
 app.get('/add-task', async (req, res) => {
     try {
         const statResp = await axios.get('https://momentum.redberryinternship.ge/api/statuses', {
@@ -168,6 +163,7 @@ app.get('/add-task', async (req, res) => {
     }
 });
 
+// Add employee functionality
 app.post("/add-employee", upload.single('avatar'), async (req, res) => {
     const { name, surname, department } = req.body;
     const department_id = parseInt(department);
@@ -196,6 +192,7 @@ app.post("/add-employee", upload.single('avatar'), async (req, res) => {
     }
 });
 
+// Add task functionality
 app.post("/add-task", async (req, res) => {
     const { name, department, description, date, employee, priority, status } = req.body;
 
@@ -221,6 +218,7 @@ app.post("/add-task", async (req, res) => {
     }
 });
 
+// Add comment functionality
 app.post("/add-comment", async (req, res) => {
     const { task_id, text } = req.body;
 
@@ -241,6 +239,7 @@ app.post("/add-comment", async (req, res) => {
     }
 });
 
+// Add reply functionality
 app.post("/add-reply", async (req, res) => {
     const { parent_id, task_id, text } = req.body;
 
@@ -261,6 +260,27 @@ app.post("/add-reply", async (req, res) => {
         res.status(500).send(error.message);
     }
 });
+
+// Change status functionality
+app.post('/change-status', async (req, res) => {
+    const { task_id, status_id } = req.body;
+
+    try {
+        await axios.put(`https://momentum.redberryinternship.ge/api/tasks/${task_id}`, {
+            status_id: parseInt(status_id)
+        }, {
+            headers: {
+                Authorization: `Bearer ${process.env.API_TOKEN}`,
+                Accept: 'application/json'
+            }
+        });
+
+        res.redirect('/');
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

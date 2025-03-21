@@ -37,11 +37,11 @@
                                     </div>
                                 </div>
                                 <div class="col">
-                                    <form action="/change-status" class="status-form">
+                                    <form class="status-form" method="POST" action="/change-status">
                                         <input type="hidden" name="task_id" value="<%= task.id %>">
-                                        <select class="form-select status-select" name="status">
+                                        <select class="form-select status-select" name="status_id" onchange="this.form.submit()">
                                             <% statuses.forEach(stat => { %>
-                                                <option name="status_id" value="<%= stat.id %>" <%= task.status.id === stat.id ? 'selected' : '' %>>
+                                                <option value="<%= stat.id %>" <%= task.status.id === stat.id ? 'selected' : '' %>>
                                                     <%= stat.name %>
                                                 </option>
                                             <% }); %>
@@ -127,6 +127,7 @@
             </div>
         </div>
     </div>
+
 
     <script src="/js/main.js"></script>
     <script src="/js/comment.js"></script>
